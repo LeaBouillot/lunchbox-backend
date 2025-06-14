@@ -1,35 +1,33 @@
-type User {
-  user_id: String!
-  name: String!
-  email: String!
-  password: String!
-  about_me: String
-  joined: String
-  is_active: Boolean
-}
-
-type Texte {
-  text_id: ID!
-  user_id: String!
-  title: String!
-  main_text: String!
-  created: String
-}
-
-type Comment {
-  comment_id: ID!
-  text_id: Int!
-  user_id: String!
-  comment_text: String!
-  created: String
-}
 type Query {
-  users(email: String, password: String): [User]
+  users: [User!]!
   textes: [Texte!]!
   comments: [Comment!]!
 }
 
 type Mutation {
+  login(email: String!, password: String!): AuthPayload
   createUser(user_id: String!, name: String!, email: String!, password: String!): User
 }
 
+type User {
+  user_id: String!
+  name: String!
+  email: String!
+}
+
+type Texte {
+  id: ID!
+  content: String!
+  # ajoute les champs nécessaires
+}
+
+type Comment {
+  id: ID!
+  texteId: ID!
+  content: String!
+  # ajoute les champs nécessaires
+}
+
+type AuthPayload {
+  token: String!
+}
